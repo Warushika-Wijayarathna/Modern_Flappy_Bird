@@ -14,3 +14,18 @@
 .assets {
     display: none;
 }
+.controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.controls button {
+    font-size: 30px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    color: white;
+}

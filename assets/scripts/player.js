@@ -25,7 +25,7 @@ class Player {
         this.game.ctx.drawImage(this.image, 0, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         if(this.game.debug){
             this.game.ctx.beginPath();
-            this.game.ctx.arc(this.collisionX + this.collisionRadius * 0.9, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+            this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
             this.game.ctx.stroke();
         }
     }
@@ -40,7 +40,7 @@ class Player {
             this.speedY = 0;
         }
         if (this.isTouchingBottom()){
-            this.y = this.game.height - this.height;
+            this.y = this.game.height - this.height - this.game.bottomMargin;
             this.wingsIdle();
         }
     }
@@ -51,7 +51,7 @@ class Player {
         this.speedY = -8 * this.game.ratio;
         this.flapSpeed = 5 * this.game.ratio;
         this.collisionRadius = 40 * this.game.ratio;
-        this.collisionX = this.x + this.width * 0.5;
+        this.collisionX = this.x + this.width * 0.7;
         this.collided = false;
         this.barSize = Math.floor(5 * this.game.ratio);
         this.energy = 30;
@@ -73,7 +73,7 @@ class Player {
         this.game.speed = this.game.minSpeed;
     }
     wingsIdle(){
-        this.frameY = 0;
+        if (!this.charging) this.frameY = 0;
     }
     wingsDown(){
         if (!this.charging) this.frameY = 1;
@@ -88,7 +88,7 @@ class Player {
         return this.y <= 0;
     }
     isTouchingBottom(){
-        return this.y >= this.game.height - this.height;
+        return this.y >= this.game.height - this.height - this.game.bottomMargin;
     }
     handleEnergy(){
         if(this.game.eventUpdate){
