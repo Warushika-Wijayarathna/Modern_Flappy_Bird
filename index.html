@@ -12,13 +12,21 @@
 <body>
     <canvas id="canvas1"></canvas>
 
+    <div class="controls">
+        <button id="restartButton">R</button>
+        <button id="fullScreenButton">F</button>
+        <button id="debugButton">D</button>
+    </div>
+
     <div class="assets">
         <img id="background" src="assets/images/background_single.png" alt="background">
         <img id="background2" src="assets/images/background_single2.png" alt="background">
         <img id="player_fish" src="assets/images/player_fish.png" alt="player_fish">
         <img id="smallGears" src="assets/images/smallGears.png" alt="smallGears">
+        <audio id="charge" src="assets/sounds/charge.mp3"></audio>
     </div>
 
+    <script src="assets/scripts/audio.js"></script>
     <script src="assets/scripts/background.js"></script>
     <script src="assets/scripts/player.js"></script>
     <script src="assets/scripts/obstacle.js"></script>

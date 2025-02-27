@@ -8,6 +8,7 @@ class Game {
         this.ratio = this.height / this.baseHeight;
         this.background = new Background(this);
         this.player = new Player(this);
+        this.sound = new AudioControl();
         this.obstacles = [];
         this.numberOfObstacles = 5;
         this.gravity;
@@ -24,6 +25,11 @@ class Game {
         this.eventUpdate = false;
         this.touchStartX;
         this.swipeDistance = 50;
+        this.debug = true;
+        this.restartButton = document.getElementById('restartButton');
+        this.fullScreenButton = document.getElementById('fullScreenButton');
+        this.debugButton = document.getElementById('debugButton');
+
 
         this.resize(window.innerWidth, window.innerHeight);
 
