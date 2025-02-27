@@ -19,9 +19,10 @@ class Player {
         this.barSize;
         this.charging;
         this.image = document.getElementById('player_fish');
+        this.frameY = 0;
     }
     draw(){
-        this.game.ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+        this.game.ctx.drawImage(this.image, 0, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         if(this.game.debug){
             this.game.ctx.beginPath();
             this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
@@ -51,6 +52,9 @@ class Player {
         this.collisionX = this.x + this.width * 0.5;
         this.collided = false;
         this.barSize = Math.floor(5 * this.game.ratio);
+        this.energy = 30;
+        this.frameY = 0;
+        this.charging = false;
     }
     startCharge(){
         this.charging = true;
@@ -59,6 +63,18 @@ class Player {
     stopCharge(){
         this.charging = false;
         this.game.speed = this.game.minSpeed;
+    }
+    wingsIdle(){
+        this.frameY = 0;
+    }
+    wingsDown(){
+        this.frameY = 1;
+    }
+    wingsUp(){
+        this.frameY = 2;
+    }
+    wingsCharge(){
+        this.frameY = 3;
     }
     isTouchingTop(){
         return this.y <= 0;
