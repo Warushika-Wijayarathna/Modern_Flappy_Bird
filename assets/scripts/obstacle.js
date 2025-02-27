@@ -9,7 +9,7 @@ class Obstacle {
         this.y = Math.random() * (this.game.height - this.scaleHeight);
         this.collisionX;
         this.collisionY;
-        this.collisionRadius = this.scaleWidth * 0.5;
+        this.collisionRadius;
         this.speedY = Math.random() < 0.5 ?
         -1 * this.game.ratio : 1 * this.game.ratio ;
         this.markedForDeletion = false;
@@ -54,6 +54,7 @@ class Obstacle {
     resize() {
         this.scaledWidth = this.spriteWidth * this.game.ratio;
         this.scaledHeight = this.spriteHeight * this.game.ratio;
+        this.collisionRadius = this.scaleWidth * 0.3;
     }
     isOffScreen() {
         return this.x < -this.scaleWidth || this.y > this.game.height;

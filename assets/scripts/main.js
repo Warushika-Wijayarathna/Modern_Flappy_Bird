@@ -35,6 +35,9 @@ class Game {
         this.canvas.addEventListener('mousedown', e => {
             this.player.flap();
         });
+        this.canvas.addEventListener('mouseup', e => {
+            this.player.wingsUp();
+        });
 
         // keyboard
         window.addEventListener('keydown', e => {
@@ -44,6 +47,12 @@ class Game {
             if(e.key === 'Shift' || e.key.toLowerCase() === 'c'){
                 this.player.startCharge();
             }
+            if (e.key.toLowerCase() === 'r') this.resize(window.innerWidth, window.innerHeight);
+            if (e.key.toLowerCase() === 'f') this.toggleFullScreen();
+            if (e.key.toLowerCase() === 'd') this.debug = !this.debug;
+        });
+        window.addEventListener('keyup', e => {
+            this.player.wingsUp();
         });
 
         // touch
@@ -154,6 +163,14 @@ class Game {
             this.ctx.fillRect(10, this.height - 10 - this.player.barSize * i, this.player.barSize * 5, this.player.barSize);
         }
         this.ctx.restore();
+    }
+
+    toggleFullScreen() {
+        if(document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            document.documentElement.requestFullscreen();
+        }
     }
 }
 

@@ -25,12 +25,13 @@ class Player {
         this.game.ctx.drawImage(this.image, 0, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         if(this.game.debug){
             this.game.ctx.beginPath();
-            this.game.ctx.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+            this.game.ctx.arc(this.collisionX + this.collisionRadius * 0.9, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
             this.game.ctx.stroke();
         }
     }
     update(){
         this.handleEnergy();
+        if (this.speedY >= 0) this.wingsUp();
         this.y += this.speedY;
         this.collisionY = this.y + this.height * 0.5;
         if (!this.isTouchingBottom() && !this.charging){
@@ -40,6 +41,7 @@ class Player {
         }
         if (this.isTouchingBottom()){
             this.y = this.game.height - this.height;
+            this.wingsIdle();
         }
     }
     resize(){
@@ -48,7 +50,7 @@ class Player {
         this.y = this.game.height * 0.5 - this.height * 0.5;
         this.speedY = -8 * this.game.ratio;
         this.flapSpeed = 5 * this.game.ratio;
-        this.collisionRadius = this.width * 0.5;
+        this.collisionRadius = 40 * this.game.ratio;
         this.collisionX = this.x + this.width * 0.5;
         this.collided = false;
         this.barSize = Math.floor(5 * this.game.ratio);
@@ -59,6 +61,7 @@ class Player {
     startCharge(){
         this.charging = true;
         this.game.speed = this.game.maxSpeed;
+        this.wingsCharge();
     }
     stopCharge(){
         this.charging = false;
@@ -68,10 +71,10 @@ class Player {
         this.frameY = 0;
     }
     wingsDown(){
-        this.frameY = 1;
+        if (!this.charging) this.frameY = 1;
     }
     wingsUp(){
-        this.frameY = 2;
+        if (!this.charging) this.frameY = 2;
     }
     wingsCharge(){
         this.frameY = 3;
@@ -100,6 +103,7 @@ class Player {
         this.stopCharge();
         if(!this.isTouchingTop()){
             this.speedY = -this.flapSpeed;
+            this.wingsDown();
         }
 
     }
