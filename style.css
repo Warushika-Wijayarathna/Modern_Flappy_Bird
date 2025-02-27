@@ -16,16 +16,15 @@
 }
 .controls {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 1rem;
+    right: 1rem;
     display: flex;
-    gap: 10px;
+    gap: 1rem;
 }
-
 .controls button {
-    font-size: 30px;
-    padding: 10px 20px;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
     background-color: transparent;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     color: white;
 }
