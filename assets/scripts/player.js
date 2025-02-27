@@ -59,10 +59,14 @@ class Player {
         this.charging = false;
     }
     startCharge(){
-        this.charging = true;
-        this.game.speed = this.game.maxSpeed;
-        this.wingsCharge();
-        this.game.sound.play(this.game.sound.charge);
+        if(this.energy >= this.minEnergy && !this.charging) {
+            this.charging = true;
+            this.game.speed = this.game.maxSpeed;
+            this.wingsCharge();
+            this.game.sound.play(this.game.sound.charge);
+        } else {
+            this.stopCharge();
+        }
     }
     stopCharge(){
         this.charging = false;
@@ -104,6 +108,7 @@ class Player {
         this.stopCharge();
         if(!this.isTouchingTop()){
             this.speedY = -this.flapSpeed;
+            this.game.sound.play(this.game.sound.flapSounds[Math.floor(Math.random() * this.game.sound.flapSounds.length)]);
             this.wingsDown();
         }
 
